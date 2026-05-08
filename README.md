@@ -16,6 +16,18 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### macOS — important
+
+Apple's bundled `/usr/bin/python3` ships an ancient Tk 8.5 that renders parts of the UI blank on recent macOS releases. Use a Python with modern Tk 8.6 instead:
+
+```bash
+brew install python-tk@3.13   # adds tkinter to Homebrew's python3.13
+python3.13 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Or install Python from <https://www.python.org/downloads/macos/> — it bundles a working Tk.
+
 ## Run
 
 ```bash
