@@ -16,6 +16,29 @@ from tkinter import messagebox
 
 from comparator import CallResult, call_anthropic, call_openai
 
+
+def _check_tk_version() -> None:
+    """Tk 8.5 (shipped with Apple's /usr/bin/python3) renders large parts of
+    the UI as blank rectangles on macOS. Fail fast with a clear pointer to the
+    fix instead of letting the user stare at an empty window."""
+    if tk.TkVersion < 8.6:
+        msg = (
+            f"This app requires Tk 8.6 or newer; detected Tk {tk.TkVersion}.\n"
+            f"Python: {sys.executable}\n\n"
+            "Apple's bundled /usr/bin/python3 ships Tk 8.5, which renders the GUI blank.\n"
+            "Fix on macOS:\n"
+            "  brew install python-tk@3.13\n"
+            "  rm -rf .venv\n"
+            "  python3.13 -m venv .venv && source .venv/bin/activate\n"
+            "  pip install -r requirements.txt\n"
+            "  python app.py"
+        )
+        print(msg, file=sys.stderr)
+        sys.exit(1)
+
+
+_check_tk_version()
+
 APP_DIR = Path(__file__).resolve().parent
 PRICES_PATH = APP_DIR / "prices.json"
 
