@@ -1,8 +1,13 @@
 """Claude vs GPT — token & cost comparison GUI (Tkinter, cross-platform)."""
 from __future__ import annotations
 
-import json
 import os
+
+# Must be set before tkinter is imported. Suppresses the cosmetic
+# "system version of Tk is deprecated" warning on macOS.
+os.environ.setdefault("TK_SILENCE_DEPRECATION", "1")
+
+import json
 import sys
 import threading
 import tkinter as tk
